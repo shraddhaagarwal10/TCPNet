@@ -1,5 +1,5 @@
 dependencies = ['torch']
-from unet_data_unc import UNet
+from unet_data_unc import UNet as TCPNet
 
 
 
