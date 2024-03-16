@@ -1,4 +1,4 @@
-# TCPNet by BDS LAB IISER Bhopal
+# TCPNet by Biomedical Data Science Lab IISER Bhopal
 
 To load the TCPNet model:
 ```
