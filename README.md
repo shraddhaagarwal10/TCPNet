@@ -23,4 +23,16 @@ To load Bayesian Categorical Crossentropy Loss:
                         T = 30,
                         num_classes = 2) 
 ```
+## Contact
 
+For any further query, comment or suggestion, you may reach out to me at tanmay@iiserb.ac.in
+
+## Citation
+```
+@inproceedings{tcpnet24,
+  title={TCPNet: A Novel Tumor Contour Prediction Network using MRIs},
+  author={Shraddha Agarwal, Vinod Kumar Kurmi, Abhirup Banerjee, Tanmay Basu},
+  booktitle={Proceedings of IEEE International Conference on Healthcare Informatics},
+  pages={},
+  year={2014}
+}
