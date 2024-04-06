@@ -25,7 +25,7 @@ To load Bayesian Categorical Crossentropy Loss:
 ```
 ## Contact
 
-For any further query, comment or suggestion, you may reach out to me at tanmay@iiserb.ac.in
+For any further query, comment or suggestion, you may reach out at tanmay@iiserb.ac.in
 
 ## Citation
 ```
