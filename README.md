@@ -14,7 +14,7 @@ git clone https://github.com/shraddhaagarwal10/TCPNet-A-Novel-Tumor-Contour-Pred
 ## How to download the Brain tumor dataset?
 The [Brain tumor dataset](https://figshare.com/articles/dataset/brain-tumor-dataset/1512427) has been used.
 
-In the **Dataset** folder, <ins>run download\_data.sh</ins> shell script to download all data. It contains 3064 MRI images and 3064 masks. Run the following command to download the data.
+In the **Dataset** folder, run <ins>download\_data.sh</ins> shell script to download all data. It contains 3064 MRI images and 3064 masks. Run the following command to download the data.
 ```
 cd Dataset
 sh download_data.sh
@@ -29,12 +29,12 @@ The numpy files have been saved in **brain_tumor_dataset** folder.
 
 ### For TCPNet with only model uncertainty:
 ```
-python3 main_model_unc.py --data-path='dataset/brain_tumor_dataset/' --epochs=200 --batch-size=32 --lr=1e-3 --sample=20 --classes=2
+python3 main_model_unc.py --data-path='Dataset/train_tumor_dataset/' --epochs=200 --batch-size=32 --lr=1e-3 --sample=20 --classes=2
 ```
 
 ### For TCPNet with both data and model uncertainty:
 ```
-python3 main_data_model_unc.py --data-path='dataset/brain_tumor_dataset/' --epochs=200 --batch-size=32 --lr=1e-3 --sample=20 --lamda=0.01 --classes=2
+python3 main_data_model_unc.py --data-path='Dataset/brain_tumor_dataset/' --epochs=200 --batch-size=32 --lr=1e-3 --sample=20 --lamda=0.01 --classes=2
 ```
 
 ## How to use TCPNet model?
