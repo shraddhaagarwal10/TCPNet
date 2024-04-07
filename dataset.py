@@ -27,7 +27,7 @@ class BrainMRIDataset(torch.utils.data.Dataset):
         return len(self.imgs)
     
 class BrainMRIDATASET:
-    def get_BrainMRIDataset(self, root = '/DATA/shraddha/brain-tumor-segmentation-unet/brain_tumor_dataset/' ):
+    def get_BrainMRIDataset(self, root = '/home/shraddha/brain-tumor-segmentation-unet/brain_tumor_dataset/' ):
         # root = 
         imgs = np.clip((np.load(os.path.join(root, 'images.npy'))/12728),0,1)
         mask = np.load(os.path.join(root, 'masks.npy'))
