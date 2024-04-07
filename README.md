@@ -8,6 +8,17 @@ The following libraries have to be installed one by one before running the code,
 
 ## How to run the framework?
 
+### For TCPNet with only model uncertainty:
+```
+python3 main_model_unc.py --data-path='/path/to/dataset/' --epochs=200 --batch-size=32 --lr=1e-3 --sample=20 --classes=2
+```
+
+### For TCPNet with both data and model uncertainty:
+```
+python3 main_data_model_unc.py --data-path='/path/to/dataset/' --epochs=200 --batch-size=32 --lr=1e-3 --sample=20 --lamda=0.01 --classes=2
+```
+
+## How to use TCPNet model?
 ```
 import torch
 repo = 'shraddhaagarwal10/TCPNet'  
@@ -15,7 +26,7 @@ model = torch.hub.load(repo,
                        'TCPNet',  
                        force_reload=True)  
 ```
-To load Bayesian Categorical Crossentropy Loss:
+## How to use Bayesian Categorical Crossentropy Loss?
 ```
  bcc_loss = torch.hub.load(repo,
                      'bayesian_categorical_crossentropy',
@@ -25,7 +36,7 @@ To load Bayesian Categorical Crossentropy Loss:
 ```
 ## Contact
 
-For any further query, comment or suggestion, you may reach out at tanmay@iiserb.ac.in
+For any further query, comment or suggestion, you may reach out at tanmay@iiserb.ac.in and shraddhaagarwal2001@gmail.com
 
 ## Citation
 ```

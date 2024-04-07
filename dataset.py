@@ -1,13 +1,9 @@
 import torch
-import torchvision
 import torchvision.transforms as transforms
 from torchvision.transforms import InterpolationMode
 import numpy as np
-import nibabel
 import os
 import random
-from torch.utils.data import Dataset, DataLoader
-# import pytorch_lightning as pl
 
 torch.manual_seed(42)
 np.random.seed(42)
@@ -27,24 +23,23 @@ class BrainMRIDataset(torch.utils.data.Dataset):
         return len(self.imgs)
     
 class BrainMRIDATASET:
-    def get_BrainMRIDataset(self, root = '/home/shraddha/brain-tumor-segmentation-unet/brain_tumor_dataset/' ):
-        # root = 
+    def get_BrainMRIDataset(self, root):
         imgs = np.clip((np.load(os.path.join(root, 'images.npy'))/12728),0,1)
         mask = np.load(os.path.join(root, 'masks.npy'))
         pid = np.load(os.path.join(root, 'pids.npy'))
 
         X_train, Y_train, X_valid, Y_valid, X_test, Y_test = self.prepare_data(imgs=imgs, mask=mask, pid=pid)
         
+        # augument with Horizontal Flip
         aug_imgs_tr = torch.cat((X_train, transforms.RandomHorizontalFlip(p = 1)(X_train)),0)
         aug_masks_tr = torch.cat((Y_train, transforms.RandomHorizontalFlip(p = 1)(Y_train)),0)
-
-        print(aug_imgs_tr.shape, aug_masks_tr.shape)
 
         train_ds = BrainMRIDataset(aug_imgs_tr,aug_masks_tr)
         val_ds = BrainMRIDataset(X_valid, Y_valid)
         test_ds = BrainMRIDataset(X_test, Y_test)
         return train_ds, val_ds, test_ds
 
+    # split the data to train, validation and test sets
     def prepare_data(self, imgs, mask,pid):
         img_dict = {}
         for i in range(len(pid)):
@@ -71,7 +66,6 @@ class BrainMRIDATASET:
         train_images = np.array(train_images)
         train_mask = np.array(train_mask)
         train_images, train_mask = self.transform_to_tensor(train_images, train_mask)
-        print(f"{train_mask.shape, train_images.shape}")
 
         val_images = []
         val_mask = []
@@ -83,7 +77,6 @@ class BrainMRIDATASET:
         val_images = np.array(val_images)
         val_mask = np.array(val_mask)
         val_images, val_mask = self.transform_to_tensor(val_images, val_mask)
-        print(f"{val_mask.shape, val_images.shape}")
 
         test_images = []
         test_mask = []
@@ -95,24 +88,17 @@ class BrainMRIDATASET:
         test_images = np.array(test_images)
         test_mask = np.array(test_mask)
         test_images, test_mask = self.transform_to_tensor(test_images, test_mask)
-        print(f"{test_mask.shape, test_images.shape}")
         return train_images, train_mask, val_images, val_mask, test_images, test_mask
 
-
+    # convert to torch tensor and transform the resolution of image to 128x128
     def transform_to_tensor(self,img, mask):
         images = torch.Tensor(img)
         masks = torch.Tensor(mask)
-        print(images.shape)
-        print(masks.shape)
         images = torch.unsqueeze(images, axis=1)
         masks = torch.unsqueeze(masks, axis=1)
-        print(images.shape)
-        print(masks.shape)
         transform_img = transforms.Resize(128)
         transform_mask = transforms.Resize(128, interpolation=InterpolationMode.NEAREST)
         final_images = transform_img(images)
         final_masks = transform_mask(masks)
-        print(final_images.shape)
-        print(final_masks.shape)
         return final_images, final_masks
     
